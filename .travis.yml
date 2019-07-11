@@ -11,7 +11,7 @@ matrix:
 
 cache:
   directories:
-  js/node_modules
+  - js/node_modules
 
 install:
   - go get -t ./...
