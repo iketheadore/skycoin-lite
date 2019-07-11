@@ -28,6 +28,7 @@ test:
 	cd go && go test ./... -timeout=10m -cover
 
 lint: ## Run linters. Use make install-linters first.
+	which go
 	go env -json
 	cd go && vendorcheck ./...
 	go env -json
