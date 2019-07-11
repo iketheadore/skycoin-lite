@@ -24,7 +24,9 @@ install:
 
 script:
   - which go
+  - go env
   - go env -json
+  - golangci-lint run -c ./.golangci.yml ./go/...
   - make check
   - make build-js-min
   - make test-suite-ts

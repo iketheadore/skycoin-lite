@@ -1,5 +1,4 @@
 .DEFAULT_GOAL := help
-
 .PHONY: build-js build-js-min
 .PHONY: test lint check
 .PHONY: install-linters format
@@ -29,6 +28,7 @@ test:
 
 lint: ## Run linters. Use make install-linters first.
 	which go
+	go env
 	go env -json
 	cd go && vendorcheck ./...
 	go env -json
