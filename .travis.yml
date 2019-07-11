@@ -1,9 +1,17 @@
 sudo: required
-dist: trusty
+dist: xenial
 language: go
 
 go:
   - "1.12.x"
+
+matrix:
+  include:
+    - os: linux
+
+cache:
+  directories:
+  js/node_modules
 
 install:
   - go get -t ./...
@@ -22,5 +30,7 @@ script:
   - make test-suite-ts
 
 notifications:
+  email:
+    - travis@skycoin.net
   # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
