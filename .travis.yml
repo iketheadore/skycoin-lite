@@ -14,6 +14,7 @@ install:
   - npm install --global source-map-support
 
 script:
+  - go env -json
   - make check
   - make build-js-min
   - make test-suite-ts
