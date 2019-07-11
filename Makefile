@@ -2,8 +2,9 @@
 .PHONY: build-js build-js-min
 .PHONY: test lint check
 .PHONY: install-linters format
-.PHONY: fix-skycoin-dep help
+.PHONY: help
 .PHONY: test-js
+.PHONY: test-suite-ts test-suite-ts-extensive
 
 build-js: ## Build /skycoin/skycoin.go. The result is saved in the repo root
 	go build -o gopherjs-tool go/vendor/github.com/gopherjs/gopherjs/tool.go
@@ -27,12 +28,8 @@ test:
 	cd go && go test ./... -timeout=10m -cover
 
 lint: ## Run linters. Use make install-linters first.
-	which go
-	go env
-	go env -json
 	cd go && vendorcheck ./...
-	go env -json
-	golangci-lint run -c ./.golangci.yml ./go/...
+	cg go && golangci-lint run -c ./.golangci.yml ./...
 	@# The govet version in golangci-lint is out of date and has spurious warnings, run it separately
 	cd go && go vet -all ./...
 

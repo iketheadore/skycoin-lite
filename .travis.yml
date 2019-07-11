@@ -23,11 +23,10 @@ install:
   - go env -json
 
 script:
-  - which go
-  - go env
-  - go env -json
-  - golangci-lint run -c ./.golangci.yml ./go/...
-  - make check
+  - vendorcheck ./go/...
+  - golangci-lint run -c ./go/.golangci.yml ./go/...
+  - go vet -all ./go/...
+  - make test
   - make build-js-min
   - make test-suite-ts
 
