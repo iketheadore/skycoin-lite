@@ -7,6 +7,10 @@ if [ -z "$VERSION" ]; then
 	exit 1
 fi
 
+which go
+
+go env
+
 GOPATH=$(go env GOPATH)
 
 echo "installing golangci-lint v$VERSION to $GOPATH"
