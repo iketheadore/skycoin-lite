@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gopherjs/gopherjs/js"
 
-	"github.com/skycoin/skycoin-lite/liteclient"
+	"github.com/skycoin/skycoin-lite/go/liteclient"
 )
 
 func main() {

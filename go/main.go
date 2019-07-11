@@ -4,7 +4,7 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/skycoin/skycoin-lite/liteclient"
+	"github.com/skycoin/skycoin-lite/go/liteclient"
 )
 
 // For testing purposes. This file is not part of the library.

@@ -4,7 +4,7 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/skycoin/skycoin-lite/liteclient"
+	"github.com/skycoin/skycoin-lite/go/liteclient"
 )
 
 func TestGenerateAddress(t *testing.T) {
@@ -44,7 +44,7 @@ func TestGenerateAddress(t *testing.T) {
 
 	liteclient.VerifyPubKeySignedHash(pubkey, signature, hash)
 
-	liteclient.VerifyAddressSignedHash(address, hash, signature)
+	liteclient.VerifyAddressSignedHash(address, signature, hash)
 
 	liteclient.VerifySignatureRecoverPubKey(signature, hash)
 

@@ -7,31 +7,31 @@
 .PHONY: test-js
 
 build-js: ## Build /skycoin/skycoin.go. The result is saved in the repo root
-	go build -o gopherjs-tool vendor/github.com/gopherjs/gopherjs/tool.go
-	GOOS=linux ./gopherjs-tool build skycoin/skycoin.go
+	go build -o gopherjs-tool go/vendor/github.com/gopherjs/gopherjs/tool.go
+	GOOS=linux ./gopherjs-tool build go/skycoin/skycoin.go -o js/skycoin.js
 
 build-js-min: ## Build /skycoin/skycoin.go. The result is minified and saved in the repo root
-	go build -o gopherjs-tool vendor/github.com/gopherjs/gopherjs/tool.go
-	GOOS=linux ./gopherjs-tool build skycoin/skycoin.go -m
+	go build -o gopherjs-tool go/vendor/github.com/gopherjs/gopherjs/tool.go
+	GOOS=linux ./gopherjs-tool build go/skycoin/skycoin.go -m -o js/skycoin.js
 
 test-js: ## Run the Go tests using JavaScript
-	go build -o gopherjs-tool vendor/github.com/gopherjs/gopherjs/tool.go
-	./gopherjs-tool test ./skycoin/ -v
+	go build -o gopherjs-tool go/vendor/github.com/gopherjs/gopherjs/tool.go
+	./gopherjs-tool test ./go/skycoin/ -v
 
 test-suite-ts: ## Run the ts version of the cipher test suite. Use a small number of test cases
-	npm run test
+	cd js && npm run test
 
 test-suite-ts-extensive: ## Run the ts version of the cipher test suite. All the test cases
-	npm run test-extensive
+	cd js && npm run test-extensive
 
 test:
-	go test ./... -timeout=10m -cover
+	go test ./go/... -timeout=10m -cover
 
 lint: ## Run linters. Use make install-linters first.
-	vendorcheck ./...
-	golangci-lint run -c .golangci.yml ./...
+	vendorcheck ./go/...
+	golangci-lint run -c ./go/.golangci.yml ./go/...
 	@# The govet version in golangci-lint is out of date and has spurious warnings, run it separately
-	go vet -all ./...
+	go vet -all ./go/...
 
 check: lint test ## Run tests and linters
 

@@ -6,7 +6,7 @@ import (
 
 	"github.com/skycoin/skycoin/src/cipher/bip39"
 
-	"github.com/skycoin/skycoin-lite/liteclient"
+	"github.com/skycoin/skycoin-lite/go/liteclient"
 )
 
 // GetAddresses generates num addresses from seed using
