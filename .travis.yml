@@ -3,15 +3,7 @@ dist: xenial
 language: go
 
 go:
-  - "1.11.x"
-
-matrix:
-  include:
-    - os: linux
-
-cache:
-  directories:
-  - js/node_modules
+  - "1.12.x"
 
 install:
   - go get -t ./...
