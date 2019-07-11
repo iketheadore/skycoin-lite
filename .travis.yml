@@ -12,6 +12,7 @@ install:
   - VERSION=1.17.0 ./ci-scripts/install-golangci-lint.sh
   - npm install
   - npm install --global source-map-support
+  - go env -json
 
 script:
   - go env -json
