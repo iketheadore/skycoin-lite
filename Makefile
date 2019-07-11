@@ -16,7 +16,7 @@ build-js-min: ## Build /skycoin/skycoin.go. The result is minified and saved in 
 
 test-js: ## Run the Go tests using JavaScript
 	go build -o gopherjs-tool go/vendor/github.com/gopherjs/gopherjs/tool.go
-	./gopherjs-tool test ./go/skycoin/ -v
+	cd go && ./gopherjs-tool test ./skycoin/ -v
 
 test-suite-ts: ## Run the ts version of the cipher test suite. Use a small number of test cases
 	cd js && npm run test
@@ -25,13 +25,13 @@ test-suite-ts-extensive: ## Run the ts version of the cipher test suite. All the
 	cd js && npm run test-extensive
 
 test:
-	go test ./go/... -timeout=10m -cover
+	cd go && go test ./... -timeout=10m -cover
 
 lint: ## Run linters. Use make install-linters first.
-	vendorcheck ./go/...
-	golangci-lint run -c ./go/.golangci.yml ./go/...
+	cd go && vendorcheck ./...
+	cd go && golangci-lint run -c ./.golangci.yml ./...
 	@# The govet version in golangci-lint is out of date and has spurious warnings, run it separately
-	go vet -all ./go/...
+	cd go && go vet -all ./...
 
 check: lint test ## Run tests and linters
 
