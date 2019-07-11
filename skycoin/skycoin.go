@@ -14,14 +14,14 @@ func main() {
 	})
 
 	js.Global.Set("CipherExtras", map[string]interface{}{
-		"VerifySignature":   liteclient.VerifySignature,
-		"ChkSig":            liteclient.ChkSig,
-		"VerifySignedHash":  liteclient.VerifySignedHash,
-		"VerifySeckey":      liteclient.VerifySeckey,
-		"VerifyPubkey":      liteclient.VerifyPubkey,
-		"AddressFromPubKey": liteclient.AddressFromPubKey,
-		"AddressFromSecKey": liteclient.AddressFromSecKey,
-		"PubKeyFromSig":     liteclient.PubKeyFromSig,
-		"SignHash":          liteclient.SignHash,
+		"VerifyPubKeySignedHash":       liteclient.VerifyPubKeySignedHash,
+		"VerifyAddressSignedHash":      liteclient.VerifyAddressSignedHash,
+		"VerifySignatureRecoverPubKey": liteclient.VerifySignatureRecoverPubKey,
+		"VerifySeckey":                 liteclient.VerifySeckey,
+		"VerifyPubkey":                 liteclient.VerifyPubkey,
+		"AddressFromPubKey":            liteclient.AddressFromPubKey,
+		"AddressFromSecKey":            liteclient.AddressFromSecKey,
+		"PubKeyFromSig":                liteclient.PubKeyFromSig,
+		"SignHash":                     liteclient.SignHash,
 	})
 }
