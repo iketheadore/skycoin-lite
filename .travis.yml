@@ -3,11 +3,13 @@ dist: trusty
 language: go
 
 go:
-  - "1.10.x"
+  - "1.12.x"
 
 install:
   - go get -t ./...
   - make install-linters
+  # Install pinned golangci-lint, overriding the latest version install by make install-linters
+  - VERSION=1.17.0 ./ci-scripts/install-golangci-lint.sh
   - npm install
   - npm install --global source-map-support
 

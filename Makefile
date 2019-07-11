@@ -1,6 +1,9 @@
 .DEFAULT_GOAL := help
 
-.PHONY: build-js build-js-min test lint check install-linters format fix-skycoin-dep help
+.PHONY: build-js build-js-min
+.PHONY: test lint check
+.PHONY: install-linters format
+.PHONY: fix-skycoin-dep help
 .PHONY: test-js
 
 build-js: ## Build /skycoin/skycoin.go. The result is saved in the repo root
@@ -26,37 +29,22 @@ test:
 
 lint: ## Run linters. Use make install-linters first.
 	vendorcheck ./...
-	gometalinter --deadline=3m -j 2 --disable-all --tests --exclude .. --vendor \
-		-E goimports \
-		-E unparam \
-		-E deadcode \
-		-E errcheck \
-		-E gosec \
-		-E goconst \
-		-E gofmt \
-		-E golint \
-		-E ineffassign \
-		-E maligned \
-		-E megacheck \
-		-E misspell \
-		-E nakedret \
-		-E structcheck \
-		-E unconvert \
-		-E varcheck \
-		-E vet \
-		./...
+	golangci-lint run -c .golangci.yml ./...
+	@# The govet version in golangci-lint is out of date and has spurious warnings, run it separately
+	go vet -all ./...
 
 check: lint test ## Run tests and linters
 
 install-linters: ## Install linters
 	go get -u github.com/FiloSottile/vendorcheck
-	go get -u github.com/alecthomas/gometalinter
-	gometalinter --vendored-linters --install
+	# For some reason this install method is not recommended, see https://github.com/golangci/golangci-lint#install
+	# However, they suggest `curl ... | bash` which we should not do
+	go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 
 format: ## Formats the code. Must have goimports installed (use make install-linters).
-	goimports -w ./skycoin
-	goimports -w ./liteclient
-	goimports -w ./mobile
+	goimports -w -local github.com/skycoin/skycoin-lite ./skycoin
+	goimports -w -local github.com/skycoin/skycoin-lite ./liteclient
+	goimports -w -local github.com/skycoin/skycoin-lite ./mobile
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
