@@ -10,7 +10,7 @@ Functions used mainly during test procedures.
 */
 
 // VerifyPubKeySignedHash verifies that hash was signed by PubKey
-func VerifyPubKeySignedHash(pubkey string, sig string, hash string) {
+func VerifyPubKeySignedHash(pubkey, sig, hash string) {
 	p := cipher.MustPubKeyFromHex(pubkey)
 	s := cipher.MustSigFromHex(sig)
 	h := cipher.MustSHA256FromHex(hash)
@@ -27,7 +27,7 @@ func VerifyPubKeySignedHash(pubkey string, sig string, hash string) {
 // - computes the address from the PubKey
 // - fail if recovered address does not match PubKey hash
 // - verify that signature is valid for hash for PubKey
-func VerifyAddressSignedHash(address string, hash string, sig string) {
+func VerifyAddressSignedHash(address, sig, hash string) {
 	a := cipher.MustDecodeBase58Address(address)
 	h := cipher.MustSHA256FromHex(hash)
 	s := cipher.MustSigFromHex(sig)
@@ -41,7 +41,7 @@ func VerifyAddressSignedHash(address string, hash string, sig string) {
 // VerifySignatureRecoverPubKey this only checks that the signature can be converted to a public key.
 // It does not check that the signature signed the hash.
 // The original public key or address is required to verify that the signature signed the hash.
-func VerifySignatureRecoverPubKey(sig string, hash string) {
+func VerifySignatureRecoverPubKey(sig, hash string) {
 	s := cipher.MustSigFromHex(sig)
 	h := cipher.MustSHA256FromHex(hash)
 
