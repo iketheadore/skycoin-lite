@@ -6,6 +6,8 @@ go:
   - "1.12.x"
 
 install:
+  - if [[ ! -d $GOPATH/src/github.com/skycoin/skycoin-lite ]]; then mkdir -p $GOPATH/src/github.com/skycoin; ln -s $TRAVIS_BUILD_DIR $GOPATH/src/github.com/skycoin/skycoin-lite; fi
+  - cd $GOPATH/src/github.com/skycoin/skycoin-lite
   - go get -t ./...
   - go get -u github.com/FiloSottile/vendorcheck
   # Install pinned golangci-lint, overriding the latest version install by make install-linters
