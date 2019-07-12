@@ -3,7 +3,7 @@ dist: xenial
 language: go
 
 go:
-  - "1.12.x"
+  - "1.11.x"
 
 install:
   - if [[ ! -d $GOPATH/src/github.com/skycoin/skycoin-lite ]]; then mkdir -p $GOPATH/src/github.com/skycoin; ln -s $TRAVIS_BUILD_DIR $GOPATH/src/github.com/skycoin/skycoin-lite; fi
